@@ -18,8 +18,6 @@ const Filters = ({ messages, setFilteredMessages }) => {
   const [disciplineMessages, setDisciplineMessages] = useState([]);
   const [statusMessages, setStatusMessages] = useState([]);
   const [criticalityMessages, setCriticalityMessages] = useState([]);
-  const [messagesByDate, setMessagesByDate] = useState([]);
-  console.log("byDate", messagesByDate);
 
   // Setting the unique values of the discipline, status and criticality.
   useEffect(() => {
@@ -101,7 +99,10 @@ const Filters = ({ messages, setFilteredMessages }) => {
               />
             </Grid>
             <Grid item xs={4} sm={4} className="progress-bar">
-              <QuantityLine value={disciplineMessage.length} />
+              <QuantityLine
+                value={disciplineMessage.length}
+                category={disciplineMessage[0].discipline}
+              />
             </Grid>
           </Grid>
         ))}
@@ -145,7 +146,10 @@ const Filters = ({ messages, setFilteredMessages }) => {
               />
             </Grid>
             <Grid item xs={4} sm={4} className="progress-bar">
-              <QuantityLine value={statusMessage.length} />
+              <QuantityLine
+                value={statusMessage.length}
+                category={statusMessage[0].status}
+              />
             </Grid>
           </Grid>
         ))}
@@ -181,7 +185,10 @@ const Filters = ({ messages, setFilteredMessages }) => {
               />
             </Grid>
             <Grid item xs={4} sm={4} className="progress-bar">
-              <QuantityLine value={criticalityMessage.length} />
+              <QuantityLine
+                value={criticalityMessage.length}
+                category={criticalityMessage[0].critical}
+              />
             </Grid>
           </Grid>
         ))}
