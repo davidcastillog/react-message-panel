@@ -9,43 +9,53 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 const Filters = ({ messages, setFilteredMessages }) => {
+  // Filter unique labels from messages
   const [discipline, setDiscipline] = useState([]);
   const [status, setStatus] = useState([]);
   const [criticality, setCriticality] = useState([]);
 
-  // Filter unique keys from array to display categories in filter checkboxes
+  // Messages by Category
+  const [disciplineMessages, setDisciplineMessages] = useState([]);
+  const [statusMessages, setStatusMessages] = useState([]);
+  const [criticalityMessages, setCriticalityMessages] = useState([]);
+  const [messagesByDate, setMessagesByDate] = useState([]);
+  console.log("byDate", messagesByDate);
+
+  // Setting the unique values of the discipline, status and criticality.
   useEffect(() => {
     const uniqueDiscipline = [
-      ...new Set(messages.map((message) => message.discipline)),
+      ...new Set(messages.map((item) => item.discipline)),
     ];
-    const uniqueStatus = [
-      ...new Set(
-        messages.map((message) => {
-          if (message.status === "answered") {
-            return "Request to answer";
-          } else if (message.status === "submited") {
-            return "Closed requests";
-          } else {
-            return "Answers to accept";
-          }
-        })
-      ),
-    ];
+
+    const uniqueStatus = [...new Set(messages.map((item) => item.status))];
+
     const uniqueCriticality = [
-      ...new Set(
-        messages.map((message) => {
-          if (!message.critical) {
-            return "Not Critical";
-          } else {
-            return "Critical";
-          }
-        })
-      ),
+      ...new Set(messages.map((item) => item.critical)),
     ];
+
     setDiscipline(uniqueDiscipline);
     setStatus(uniqueStatus);
     setCriticality(uniqueCriticality);
   }, [messages]);
+
+  // Filtering the messages based on the discipline, status and criticality.
+  useEffect(() => {
+    const disciplineCount = discipline.map((discipline) => {
+      return messages.filter((message) => message.discipline === discipline);
+    });
+
+    const statusCount = status.map((status) => {
+      return messages.filter((message) => message.status === status);
+    });
+
+    const criticalityCount = criticality.map((critical) => {
+      return messages.filter((message) => message.critical === critical);
+    });
+
+    setDisciplineMessages(disciplineCount);
+    setStatusMessages(statusCount);
+    setCriticalityMessages(criticalityCount);
+  }, [messages, discipline, status, criticality]);
 
   return (
     <>
@@ -67,28 +77,31 @@ const Filters = ({ messages, setFilteredMessages }) => {
       <Typography
         variant="h6"
         gutterBottom
-        sx={{ fontSize: "14px", color: "#4b4b4b", pt: 2, mb:2 }}
+        sx={{ fontSize: "14px", color: "#4b4b4b", pt: 2, mb: 2 }}
       >
         Disciplines
       </Typography>
       <FormGroup sx={{ mb: 2 }}>
-        {discipline.map((discipline) => (
+        {disciplineMessages.map((disciplineMessage, i) => (
           <Grid
             container
-            key={discipline}
+            key={i}
             spacing={12}
             sx={{ display: "flex", direction: "row", alignItems: "center" }}
           >
             <Grid item xs={8} sm={8} className="filter-checkline">
               <FormControlLabel
-                control={<Checkbox size="small" color="default" defaultChecked />}
-                label={discipline}
+                key={i}
+                control={
+                  <Checkbox size="small" color="default" defaultChecked />
+                }
+                label={disciplineMessage[0].discipline}
+                value={disciplineMessage[0].discipline}
                 className="checkbox-label"
-                value={discipline}
               />
             </Grid>
             <Grid item xs={4} sm={4} className="progress-bar">
-              <QuantityLine value={80} />
+              <QuantityLine value={disciplineMessage.length} />
             </Grid>
           </Grid>
         ))}
@@ -102,23 +115,37 @@ const Filters = ({ messages, setFilteredMessages }) => {
         Status
       </Typography>
       <FormGroup sx={{ mb: 2 }}>
-        {status.map((status) => (
+        {statusMessages.map((statusMessage, i) => (
           <Grid
             container
-            key={status}
+            key={i}
             spacing={12}
             sx={{ display: "flex", direction: "row", alignItems: "center" }}
           >
             <Grid item xs={8} sm={8} className="filter-checkline">
               <FormControlLabel
-                control={<Checkbox size="small" color="default" defaultChecked />}
-                label={status}
+                key={i}
+                control={
+                  <Checkbox size="small" color="default" defaultChecked />
+                }
+                // if the status is "closed" then the label is "Closed requests".
+                // If the status is "answered" then the label is "Answers to accept"
+                // If the status is "submited" then the label is "Requests to answer".
+                label={
+                  statusMessage[0].status === "closed"
+                    ? "Closed requests"
+                    : statusMessage[0].status === "answered"
+                    ? "Answers to accept"
+                    : statusMessage[0].status === "submited"
+                    ? "Request to answer"
+                    : statusMessage[0].status
+                }
+                value={statusMessage[0].status}
                 className="checkbox-label"
-                value={status}
               />
             </Grid>
             <Grid item xs={4} sm={4} className="progress-bar">
-              <QuantityLine value={80} />
+              <QuantityLine value={statusMessage.length} />
             </Grid>
           </Grid>
         ))}
@@ -132,26 +159,59 @@ const Filters = ({ messages, setFilteredMessages }) => {
         Criticality
       </Typography>
       <FormGroup sx={{ mb: 2 }}>
-        {criticality.map((criticality) => (
+        {criticalityMessages.map((criticalityMessage, i) => (
           <Grid
             container
-            key={criticality}
+            key={i}
             spacing={12}
             sx={{ display: "flex", direction: "row", alignItems: "center" }}
           >
             <Grid item xs={8} sm={8} className="filter-checkline">
               <FormControlLabel
-                control={<Checkbox size="small" color="default" defaultChecked />}
-                label={criticality}
+                key={i}
+                control={
+                  <Checkbox size="small" color="default" defaultChecked />
+                }
+                // If the criticality is true then the label is "Critical" else "Not Critical"
+                label={
+                  criticalityMessage[0].critical ? "Critical" : "Not Critical"
+                }
+                value={criticalityMessage[0].critical}
                 className="checkbox-label"
-                value={criticality}
               />
             </Grid>
             <Grid item xs={4} sm={4} className="progress-bar">
-              <QuantityLine value={80} />
+              <QuantityLine value={criticalityMessage.length} />
             </Grid>
           </Grid>
         ))}
+      </FormGroup>
+      <Divider />
+      <Typography
+        variant="h6"
+        gutterBottom
+        sx={{ fontSize: "14px", color: "#4b4b4b", pt: 2 }}
+      >
+        Registration Date
+      </Typography>
+      <FormGroup sx={{ mb: 2 }}>
+        <Grid
+          container
+          spacing={12}
+          sx={{ display: "flex", direction: "row", alignItems: "center" }}
+        >
+          <Grid item xs={8} sm={8} className="filter-checkline">
+            <FormControlLabel
+              control={<Checkbox size="small" color="default" defaultChecked />}
+              label="New ( < 2 weeks )"
+              className="checkbox-label"
+              value="15"
+            />
+          </Grid>
+          <Grid item xs={4} sm={4} className="progress-bar">
+            <QuantityLine value={100} />
+          </Grid>
+        </Grid>
       </FormGroup>
     </>
   );

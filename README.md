@@ -8,7 +8,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a React app using an mockdata to display three columns panel.
+This is a React app using mockdata to display three columns message panel.
 
 The project is built using the following technologies:
 
@@ -41,7 +41,7 @@ _Follow this simple steps:_
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/davidcastillog/front-end-data-panel.git
+   git clone https://github.com/davidcastillog/react-message-panel.git
    ```
 2. Install NPM packages
    ```sh

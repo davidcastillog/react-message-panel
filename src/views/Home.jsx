@@ -14,7 +14,7 @@ export const Home = () => {
   const [messageSelected, setMessageSelected] = useState({});
   const [filteredMessages, setFilteredMessages] = useState([]);
   const [panelWidth, setPanelWidth] = useState(10);
-  console.log(messages)
+  console.log(messages);
 
   // Handle new window when message is selected
   const handleNewWindow = () => {
