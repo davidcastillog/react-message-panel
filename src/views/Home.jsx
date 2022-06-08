@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { TableOfMessages } from "../components";
+import {
+  TableOfMessages,
+  RequestBar,
+  MessageCard,
+} from "../components";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -33,7 +37,8 @@ export const Home = () => {
             xs={12}
             sm={3}
             style={{ maxHeight: "100vh", overflow: "auto" }}
-          ></Grid>
+          >
+          </Grid>
           <Grid
             item
             xs={12}
@@ -41,6 +46,7 @@ export const Home = () => {
             style={{ maxHeight: "100vh", overflow: "auto" }}
             className="panel-grid"
           >
+            <RequestBar />
             <TableOfMessages
               messages={messages}
               setMessages={setMessages}
@@ -55,7 +61,12 @@ export const Home = () => {
               sm={3}
               className="panel-grid"
               style={{ maxHeight: "100vh", overflow: "auto" }}
-            ></Grid>
+            >
+              <MessageCard
+                messageSelected={messageSelected}
+                setMessageSelected={setMessageSelected}
+              />
+            </Grid>
           )}
         </Grid>
       </Container>
