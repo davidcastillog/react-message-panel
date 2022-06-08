@@ -27,7 +27,7 @@ export default function MessageCard({ messageSelected, setMessageSelected }) {
     <Card sx={{ width: 350 }}>
       <CardContent>
         <IconButton
-          sx={{ position: "relative", left: "275px"}}
+          sx={{ position: "relative", left: "275px" }}
           onClick={(e) => handleClose()}
         >
           <CloseIcon color="disabled" />

@@ -3,6 +3,7 @@ import {
   TableOfMessages,
   RequestBar,
   MessageCard,
+  Filters,
 } from "../components";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
@@ -38,6 +39,7 @@ export const Home = () => {
             sm={3}
             style={{ maxHeight: "100vh", overflow: "auto" }}
           >
+            <Filters label={"Label"} value={0} />
           </Grid>
           <Grid
             item
