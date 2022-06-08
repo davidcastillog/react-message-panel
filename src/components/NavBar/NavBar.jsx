@@ -14,7 +14,7 @@ const NavBar = () => {
   const pages = ["Documents", "RFI", "Submittals", "Issues"];
 
   return (
-    <AppBar position="sticky" style={{ background: "#ffffff" }}>
+    <AppBar position="sticky" style={{ background: "#ffffff" }} elevation={1}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -97,10 +97,8 @@ const NavBar = () => {
               </Typography>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <IconButton sx={{ p: 0 }}>
-              <img src={ArupLogo} alt="avatar" height={25} />
-            </IconButton>
+          <Box sx={{ flexGrow: 0, pt: 1 }}>
+            <img src={ArupLogo} alt="avatar" height={25} />
           </Box>
         </Toolbar>
       </Container>

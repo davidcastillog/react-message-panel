@@ -5,7 +5,7 @@ import LinearProgress, {
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-export const QuantityLine = ({ value, type }) => {
+export const QuantityLine = ({ value }) => {
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 5,
@@ -14,27 +14,25 @@ export const QuantityLine = ({ value, type }) => {
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor: "#1a90ff",
+      backgroundColor: "#aaaaaa",
     },
   }));
 
   return (
     <>
       <Grid
-        spacing={12}
+        container
         sx={{ display: "flex", direction: "row", alignItems: "center" }}
       >
         <Grid item xs={10} sm={10}>
           <BorderLinearProgress variant="determinate" value={value} />
         </Grid>
         <Grid item xs={2} sm={2}>
-          <Typography>
-            <Typography
-              style={{ display: "inline-block" }}
-              variant="body2"
-              color="text.secondary"
-            >{`${Math.round(value)}`}</Typography>
-          </Typography>
+          <Typography
+            style={{ display: "inline-block" }}
+            variant="body2"
+            color="text.secondary"
+          >{`${Math.round(value)}`}</Typography>
         </Grid>
       </Grid>
     </>

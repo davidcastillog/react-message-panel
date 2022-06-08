@@ -24,7 +24,7 @@ export default function MessageCard({ messageSelected, setMessageSelected }) {
   };
 
   return (
-    <Card sx={{ width: 350 }}>
+    <Card sx={{ width: 350 }} elevation={3}>
       <CardContent>
         <IconButton
           sx={{ position: "relative", left: "275px" }}

@@ -2,13 +2,13 @@
 
 <div align="center">
   </a>
-  <h1 align="center">Front-end Data Panel</h1>
+  <h1 align="center">Front-end React Message Panel</h1>
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a React app using an mockDagga to display three columns of data.
+This is a React app using an mockdata to display three columns panel.
 
 The project is built using the following technologies:
 

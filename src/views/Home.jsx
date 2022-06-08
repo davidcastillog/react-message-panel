@@ -12,15 +12,16 @@ import Grid from "@mui/material/Grid";
 export const Home = () => {
   const [messages, setMessages] = useState([]);
   const [messageSelected, setMessageSelected] = useState({});
-  const [messagePanelWidth, setmessagePanelWidth] = useState(10);
-  console.log(messages);
+  const [filteredMessages, setFilteredMessages] = useState([]);
+  const [panelWidth, setPanelWidth] = useState(10);
+  console.log(messages)
 
   // Handle new window when message is selected
   const handleNewWindow = () => {
     if (messageSelected.num) {
-      setmessagePanelWidth(6);
+      setPanelWidth(6);
     } else {
-      setmessagePanelWidth(9);
+      setPanelWidth(9);
     }
   };
 
@@ -39,12 +40,12 @@ export const Home = () => {
             sm={3}
             style={{ maxHeight: "100vh", overflow: "auto" }}
           >
-            <Filters label={"Label"} value={0} />
+            <Filters label={"Label"} value={0} messages={messages} />
           </Grid>
           <Grid
             item
             xs={12}
-            sm={messagePanelWidth}
+            sm={panelWidth}
             style={{ maxHeight: "100vh", overflow: "auto" }}
             className="panel-grid"
           >
