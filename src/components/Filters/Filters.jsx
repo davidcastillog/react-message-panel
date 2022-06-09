@@ -19,6 +19,10 @@ const Filters = ({ messages }) => {
   const [statusMessages, setStatusMessages] = useState([]);
   const [criticalityMessages, setCriticalityMessages] = useState([]);
 
+  // Messages by Date
+  const [messagesByDate, setMessagesByDate] = useState([]);
+  console.log("Date", messagesByDate);
+
   // Setting the unique values of the discipline, status and criticality.
   useEffect(() => {
     const uniqueDiscipline = [
@@ -54,6 +58,29 @@ const Filters = ({ messages }) => {
     setStatusMessages(statusCount);
     setCriticalityMessages(criticalityCount);
   }, [messages, discipline, status, criticality]);
+
+  // Filter messages by date (15 days, 180 days, 1 year)
+  useEffect(() => {
+    const newDate = new Date(); // Get current date
+    const dateCount = [
+      messages.filter((message) => {
+        const date = new Date(message.regDate); // Convert date to format DD.MM.YYYY
+        const diff = newDate - date; // Get difference between current date and date of message
+        return diff < 15 * 24 * 60 * 60 * 1000; // Less than 15 days
+      }),
+      messages.filter((message) => {
+        const date = new Date(message.regDate);
+        const diff = newDate - date;
+        return diff < 180 * 24 * 60 * 60 * 1000; // Less than 180 days
+      }),
+      messages.filter((message) => {
+        const date = new Date(message.regDate);
+        const diff = newDate - date;
+        return diff < 365 * 24 * 60 * 60 * 1000; // Less than 1 year
+      }),
+    ];
+    setMessagesByDate(dateCount);
+  }, [messages]);
 
   return (
     <>
@@ -91,11 +118,7 @@ const Filters = ({ messages }) => {
               <FormControlLabel
                 key={i}
                 control={
-                  <Checkbox
-                    size="small"
-                    color="default"
-                    defaultChecked
-                  />
+                  <Checkbox size="small" color="default" defaultChecked />
                 }
                 label={disciplineMessage[0].discipline}
                 value={disciplineMessage[0].discipline}
@@ -105,6 +128,7 @@ const Filters = ({ messages }) => {
             <Grid item xs={4} sm={4} className="progress-bar">
               <QuantityLine
                 value={disciplineMessage.length}
+                totalMessages={messages.length}
                 category={disciplineMessage[0].discipline}
               />
             </Grid>
@@ -152,6 +176,7 @@ const Filters = ({ messages }) => {
             <Grid item xs={4} sm={4} className="progress-bar">
               <QuantityLine
                 value={statusMessage.length}
+                totalMessages={messages.length}
                 category={statusMessage[0].status}
               />
             </Grid>
@@ -191,6 +216,7 @@ const Filters = ({ messages }) => {
             <Grid item xs={4} sm={4} className="progress-bar">
               <QuantityLine
                 value={criticalityMessage.length}
+                totalMessages={messages.length}
                 category={criticalityMessage[0].critical}
               />
             </Grid>
@@ -206,23 +232,37 @@ const Filters = ({ messages }) => {
         Registration Date
       </Typography>
       <FormGroup sx={{ mb: 2 }}>
-        <Grid
-          container
-          spacing={12}
-          sx={{ display: "flex", direction: "row", alignItems: "center" }}
-        >
-          <Grid item xs={8} sm={8} className="filter-checkline">
-            <FormControlLabel
-              control={<Checkbox size="small" color="default" defaultChecked />}
-              label="New ( < 2 weeks )"
-              className="checkbox-label"
-              value="15"
-            />
+        {messagesByDate.map((messagesByDateMessage, i) => (
+          <Grid
+            container
+            key={i}
+            spacing={12}
+            sx={{ display: "flex", direction: "row", alignItems: "center" }}
+          >
+            <Grid item xs={8} sm={8} className="filter-checkline">
+              <FormControlLabel
+                key={i}
+                control={
+                  <Checkbox size="small" color="default" defaultChecked />
+                }
+                label={
+                  i === 0
+                    ? "New (< 15 days)"
+                    : i === 1
+                    ? "(< 180 days)"
+                    : "(< 1 year)"
+                }
+                className="checkbox-label"
+              />
+            </Grid>
+            <Grid item xs={4} sm={4} className="progress-bar">
+              <QuantityLine
+                value={messagesByDateMessage.length}
+                totalMessages={messages.length}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={4} sm={4} className="progress-bar">
-            <QuantityLine value={100} />
-          </Grid>
-        </Grid>
+        ))}
       </FormGroup>
     </>
   );
