@@ -8,8 +8,8 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const Filters = ({ messages, setFilteredMessages }) => {
-  // Filter unique labels from messages
+const Filters = ({ messages }) => {
+  // Filter unique labels from messages to use in the filter panel
   const [discipline, setDiscipline] = useState([]);
   const [status, setStatus] = useState([]);
   const [criticality, setCriticality] = useState([]);
@@ -91,7 +91,11 @@ const Filters = ({ messages, setFilteredMessages }) => {
               <FormControlLabel
                 key={i}
                 control={
-                  <Checkbox size="small" color="default" defaultChecked />
+                  <Checkbox
+                    size="small"
+                    color="default"
+                    defaultChecked
+                  />
                 }
                 label={disciplineMessage[0].discipline}
                 value={disciplineMessage[0].discipline}

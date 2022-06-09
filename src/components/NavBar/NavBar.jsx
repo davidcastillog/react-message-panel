@@ -84,7 +84,7 @@ const NavBar = () => {
             LOGO
           </Typography>
           <Box
-            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, ml: 15 }}
+            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, ml: 19 }}
           >
             {pages.map((page) => (
               <Typography
@@ -97,8 +97,8 @@ const NavBar = () => {
               </Typography>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0, pt: 1 }}>
-            <img src={ArupLogo} alt="avatar" height={25} />
+          <Box sx={{ flexGrow: 0, pt: 1, pr:3 }}>
+            <img src={ArupLogo} alt="logo" height={25} />
           </Box>
         </Toolbar>
       </Container>

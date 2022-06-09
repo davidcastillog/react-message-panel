@@ -4,6 +4,7 @@ import {
   RequestBar,
   MessageCard,
   Filters,
+  PaginationMU,
 } from "../components";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
@@ -11,12 +12,11 @@ import Grid from "@mui/material/Grid";
 
 export const Home = () => {
   const [messages, setMessages] = useState([]);
+  const [messagesPaginated, setMessagesPaginated] = useState([]);
   const [messageSelected, setMessageSelected] = useState({});
-  const [filteredMessages, setFilteredMessages] = useState([]);
   const [panelWidth, setPanelWidth] = useState(10);
-  console.log(messages);
 
-  // Handle new window when message is selected
+  // Handle grid size when a message is selected
   const handleNewWindow = () => {
     if (messageSelected.num) {
       setPanelWidth(6);
@@ -32,7 +32,7 @@ export const Home = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="xl" sx={{ p: 3 }}>
+      <Container maxWidth="xl" sx={{ pt: 3, pb: 3 }}>
         <Grid container spacing={12}>
           <Grid
             item
@@ -51,11 +51,17 @@ export const Home = () => {
           >
             <RequestBar />
             <TableOfMessages
-              messages={messages}
+              messages={messagesPaginated}
               setMessages={setMessages}
               messageSelected={messageSelected}
               setMessageSelected={setMessageSelected}
             />
+            <Grid container justifyContent="center" paddingTop={2}>
+              <PaginationMU
+                messages={messages}
+                setMessagesPaginated={setMessagesPaginated}
+              />
+            </Grid>
           </Grid>
           {messageSelected.num && (
             <Grid

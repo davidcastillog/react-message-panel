@@ -5,3 +5,7 @@
 .panel-grid{
   padding-left: 10px !important;
 }
+
+.MuiContainer-maxWidthXl{
+  padding-right: 10px!important;
+}

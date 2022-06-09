@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 export const QuantityLine = ({ value, category }) => {
+  // Adjust the color of the progress bar based on the category
   const colorByCategory = (category) => {
     switch (category) {
       case true:
@@ -32,6 +33,7 @@ export const QuantityLine = ({ value, category }) => {
       border: `1px solid ${theme.palette.grey[200]}`,
     },
   }));
+
   return (
     <>
       <Grid
@@ -39,7 +41,7 @@ export const QuantityLine = ({ value, category }) => {
         sx={{ display: "flex", direction: "row", alignItems: "center" }}
       >
         <Grid item xs={10} sm={10}>
-          <BorderLinearProgress variant="determinate" value={value} />
+          <BorderLinearProgress variant="determinate" value={Math.round(value)} />
         </Grid>
         <Grid item xs={2} sm={2}>
           <Typography

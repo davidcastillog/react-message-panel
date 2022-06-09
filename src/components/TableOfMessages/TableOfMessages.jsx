@@ -41,7 +41,7 @@ const TableOfMessages = ({
     return newDiscipline;
   };
 
-  // Set row as active if the user clicks on it
+  // Set row as active if the user clicks on it and set it in the state to be used in the MessageCard
   const setActiveRow = (message) => {
     setMessageSelected({
       num: message.num,
@@ -49,24 +49,24 @@ const TableOfMessages = ({
       subject: message.subject,
       discipline: message.discipline,
       sentTo: message.sentTo,
-      regDate: dateFormat(message.regDate),
+      regDate: dateFormat(message.regDate), // Convert date to format DD.MM.YYYY
       status: message.status,
       critical: message.critical,
-      name: nameFormat(message.sentTo.name),
+      name: nameFormat(message.sentTo.name), // Change name to N. Lastname format
       company: message.sentTo.company,
-    })
+    });
   };
 
-  // Sort messages by date in descending order
+  // Sort messages in descending order
   const sortMessages = (messages) => {
     return messages.sort((a, b) => {
-      return new Date(b.regDate) - new Date(a.regDate);
+      return new Date(b.num) - new Date(a.num);
     });
   };
 
   useEffect(() => {
     setMessages(sortMessages(messagesData));
-  }, []);
+  }, [messagesData]);
 
   return (
     <>

@@ -44,7 +44,7 @@ export default function MessageCard({ messageSelected, setMessageSelected }) {
           {messageSelected.subject}
         </Typography>
         <Typography sx={{ mb: 1.5, fontSize: 12 }} color="text.secondary">
-          Sent to:{nameFormat(messageSelected.sentTo.name)}
+          Sent to: {nameFormat(messageSelected.sentTo.name)}
         </Typography>
         <Typography sx={{ display: "inline-flex", mb: 3 }} variant="body2">
           <StatusMark status={messageSelected.status} />
@@ -58,7 +58,7 @@ export default function MessageCard({ messageSelected, setMessageSelected }) {
           sx={{ mt: 2, fontSize: 12, color: "black" }}
           color="text.secondary"
         >
-          Request:
+          Request
         </Typography>
         <Grid
           container
@@ -83,12 +83,14 @@ export default function MessageCard({ messageSelected, setMessageSelected }) {
             </Typography>
           </Grid>
         </Grid>
-        <Typography
-          sx={{ mb: 2, fontSize: 12, color: "black" }}
-          color="text.secondary"
-        >
-          {messageSelected.message}
-        </Typography>
+        <Grid item xs={12} sm={12}>
+          <Typography
+            sx={{ mb: 2, fontSize: 12, color: "black" }}
+            color="text.secondary"
+          >
+            {messageSelected.message}
+          </Typography>
+        </Grid>
         <Divider />
       </CardContent>
       <CardActions sx={{ pb: 3, justifyContent: "flex-end" }}>
