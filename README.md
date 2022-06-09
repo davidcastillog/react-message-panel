@@ -2,13 +2,13 @@
 
 <div align="center">
   </a>
-  <h1 align="center">Front-end Data Panel</h1>
+  <h1 align="center">Front-end React Message Panel</h1>
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a React app using an mockDagga to display three columns of data.
+This is a React app using mockdata to display three columns message panel.
 
 The project is built using the following technologies:
 
@@ -41,7 +41,7 @@ _Follow this simple steps:_
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/davidcastillog/front-end-data-panel.git
+   git clone https://github.com/davidcastillog/react-message-panel.git
    ```
 2. Install NPM packages
    ```sh
@@ -79,4 +79,4 @@ Distributed under the MIT License. See `license.txt` for more information.
 <p align="right"><a href="#top">back to top ^</a></p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[license-shield]:https://img.shields.io/github/license/davidcastillog/front-end-data-panel
+[license-shield]:https://img.shields.io/github/license/davidcastillog/react-message-panel

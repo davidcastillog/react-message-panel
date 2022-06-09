@@ -1,0 +1,12 @@
+.MuiFormControlLabel-label {
+  font-size: 11px !important;
+  color: #757575;
+}
+
+.progress-bar{
+    padding-left: 0 !important;
+}
+
+.filter-checkline{
+  padding-top: 88px!important;
+}
